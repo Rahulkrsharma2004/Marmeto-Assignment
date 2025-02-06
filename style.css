@@ -48,63 +48,77 @@ body {
   align-items: center;
 }
 
+
+
+
+
 .bg-img {
   position: relative;
+  width: 100%;
+  height: 290px;
+  overflow: hidden;
+}
+
+.bg-img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-image: url("https://s3-alpha-sig.figma.com/img/1461/f3d6/ff74c027a1888544144abe4be6e02cbf?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=m1Ro4rX-WSHADndU-eWn9eAaKCsg8SGHfW8wUmvkx5H9p5wum4k3IOD~KjJb2xEINQPpRtV-EDQMUjNbIDifUpEPtEPwW5rdEHLE4S0CdkeoTc3iCpowuSt1B-ZcGLWo-1ruVJr96WiP5Jta7khHGon3g1fwfE7K~ACC-J-kJ-7wcwR2BsqWqvlvdeBwfa2XcelcradIxaUE~dpQgPULx0qdmErp9PxYK41Tkk3ugW4MNbrvvH2wyfyd9sE49VLKmJ~rh83CDSa4jg5u~fThR1t8WLWodhns-1T1OlJjkYgH1CGfzuEf87xJHCHDhrdsmuSK6MG82ReKHZdR0ohV5Q__");
   background-size: cover;
   background-position: center;
-  width: 1272px;
-  height: 290px;
-  opacity: 50%;
   filter: blur(2px);
+  opacity: 50%;
+  /* z-index: -1; */
 }
 
-.content {
+.content, .bg-content, .breadcrumb {
   position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  color: rgb(
-    0,
-    0,
-    0
-  ); /* White color for text to stand out on the blurred background */
+  color: rgb(255, 255, 255); 
+  z-index: 1; 
 }
 
 .bg-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: rgb(0, 0, 0);
-  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 15%;
+  /* transform: translate(-50%, -50%); */
 }
 
-.bg-content img {
-  width: 77px;
-  height: 77px;
+.bg-content h4{
+  /* font-family:; */
+  margin: 0;
+  font-size: 40px;
+  color: #000000;
 }
 
 .breadcrumb {
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 55%;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgb(0, 0, 0);
 }
 
-.breadcrumb p {
-  margin: 0 10px;
+.breadcrumb p:nth-child(1) {
+  /* margin: 0 10px; */
+  color: #000000;
+  font-weight: bold;
+
 }
 
 .breadcrumb svg {
   margin: 0 5px;
 }
+
+.bg-content img {
+  width: 77px;
+  height: 70px;
+}
+
 
 
 
