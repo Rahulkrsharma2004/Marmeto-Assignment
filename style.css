@@ -10,27 +10,26 @@ body {
 }
 
 /* Navbar */
-.navbar {
+/* .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
   position: relative;
-}
+} */
 
 .logo {
   display: flex;
   align-items: center;
-  /* gap: 10px; */
   font-size: 24px;
   font-weight: bold;
   color: #000000;
 }
 
 .logo img {
-  width: 50px; /* Set image width */
+  width: 50px;
   height: auto;
-  border-radius: 8px; /* Optional: Rounded corners */
+  border-radius: 8px;
 }
 
 .navbar {
@@ -46,14 +45,14 @@ body {
   align-items: center;
 }
 
-.nav-link a {
+/* .nav-link a {
   text-decoration: none;
   color: #000000;
-}
+} */
 
 .icon-svg {
   width: 200px;
-  gap: 30px;
+  gap: 500px;
   display: flex;
   align-items: center;
 }
@@ -188,10 +187,10 @@ body {
 
 /* Icon section */
 .icon-svg {
-  width: auto;
-  gap: 15px;
+  width: 200px;
+  gap: 40px;
   display: flex;
-  align-items: center;
+  /* justify-content: space-between; */
 }
 
 /* Background Image */
