@@ -3,33 +3,37 @@ const apiURL = 'https://cdn.shopify.com/s/files/1/0883/2188/4479/files/apiCartDa
 fetch(apiURL)
   .then(response => response.json())
   .then(data => {
-    console.log('API Response:', data.items); // Debugging: Check actual response
+    console.log('API Response:', data.items);
 
-    if (!data || !data.items || !Array.isArray(data.items)) {  // Ensure data and items exist and are an array
+    if (!data || !data.items || !Array.isArray(data.items)) { 
       console.error('Cart data not found in API response or items is not an array');
       return;
     }
 
-    const cartItemsContainer = document.querySelector('#cart-items'); // Ensure correct ID
-    cartItemsContainer.innerHTML = ""; // Clear existing content
+    const cartItemsContainer = document.querySelector('#cart-items');
+    cartItemsContainer.innerHTML = "";
 
     let subtotal = 0;
 
-    data.items.forEach((item, index) => {  // Loop directly through data.items
-      if (!item.price || !item.quantity) return; // Skip invalid items
+    data.items.forEach((item, index) => { 
+      const price = parseFloat(item.price) || 0;
+      const quantity = parseInt(item.quantity) || 0;
 
-      const itemSubtotal = item.price * item.quantity;
+      console.log(`Item ${index}:`, { price, quantity });
+
+      if (price <= 0 || quantity <= 0) return;
+
+      const itemSubtotal = price * quantity;
       subtotal += itemSubtotal;
 
       const row = document.createElement('tr');
       row.innerHTML = `
         <td class="product-info">
           <img src="${item.image}" alt="${item.name}" class="cart-image" />
-          <span>${item.product_title
-          }</span>
+          <span>${item.product_title}</span>
         </td>
-        <td>₹ ${item.price.toFixed(2)}</td>
-        <td><input type="number" value="${item.quantity}" min="1" class="cart-quantity" data-index="${index}"></td>
+        <td>₹ ${price.toFixed(2)}</td>
+        <td><input type="number" value="${quantity}" min="1" class="cart-quantity" data-index="${index}"></td>
         <td>₹ <span class="item-subtotal">${itemSubtotal.toFixed(2)}</span></td>
         <td><span class="delete" data-index="${index}" style="cursor:pointer;">🗑️</span></td>
       `;
@@ -38,7 +42,6 @@ fetch(apiURL)
 
     updateCartTotals(subtotal);
 
-    // Attach event listeners for quantity change and delete button
     document.querySelectorAll('.cart-quantity').forEach(input => {
       input.addEventListener('change', updateQuantity);
     });
@@ -49,12 +52,9 @@ fetch(apiURL)
   })
   .catch(error => console.error('Error fetching cart data:', error));
 
-/**
- * Updates the subtotal and total when quantity is changed.
- */
 function updateQuantity(event) {
   const index = event.target.dataset.index;
-  const newQuantity = parseInt(event.target.value);
+  const newQuantity = parseInt(event.target.value) || 1;
   if (newQuantity < 1) return;
 
   fetch(apiURL)
@@ -63,45 +63,39 @@ function updateQuantity(event) {
       if (!data || !data.items) return;
 
       const item = data.items[index];
-      const newSubtotal = item.price * newQuantity;
+      const price = parseFloat(item.price) || 0;
+      const newSubtotal = price * newQuantity;
+
       event.target.closest('tr').querySelector('.item-subtotal').textContent = newSubtotal.toFixed(2);
 
-      // Recalculate totals
       let newTotal = 0;
       document.querySelectorAll('.item-subtotal').forEach(subtotal => {
-        newTotal += parseFloat(subtotal.textContent);
+        newTotal += parseFloat(subtotal.textContent) || 0;
       });
 
       updateCartTotals(newTotal);
     });
 }
 
-/**
- * Removes an item from the cart.
- */
 function removeItem(event) {
   const index = event.target.dataset.index;
-  event.target.closest('tr').remove(); // Remove item row
+  event.target.closest('tr').remove();
 
   let newTotal = 0;
   document.querySelectorAll('.item-subtotal').forEach(subtotal => {
-    newTotal += parseFloat(subtotal.textContent);
+    newTotal += parseFloat(subtotal.textContent) || 0;
   });
 
   updateCartTotals(newTotal);
 }
 
-/**
- * Updates the cart total and subtotal values.
- */
 function updateCartTotals(total) {
+  console.log('Updating Total:', total); // Debugging: Check total value
   document.querySelector('.subtotal').textContent = `Subtotal: ₹ ${total.toFixed(2)}`;
-  document.querySelector('.total span').textContent = `₹ ${total.toFixed(2)}`;
+  document.querySelector('.total').innerHTML = `Total: ₹ ${total.toFixed(2)}`;
 }
 
-/**
- * Checkout Button Functionality (Placeholder).
- */
+
 document.getElementById('checkout').addEventListener('click', () => {
   alert('Proceeding to checkout...');
 });
