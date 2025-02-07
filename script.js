@@ -99,3 +99,13 @@ function updateCartTotals(total) {
 document.getElementById('checkout').addEventListener('click', () => {
   alert('Proceeding to checkout...');
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navLinks = document.querySelector(".nav-link");
+
+  menuToggle.addEventListener("click", function () {
+    navLinks.classList.toggle("nav-active");
+  });
+});

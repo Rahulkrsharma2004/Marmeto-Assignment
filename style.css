@@ -1,3 +1,4 @@
+/* General Styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -6,6 +7,15 @@ body {
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  position: relative;
 }
 
 .logo {
@@ -122,7 +132,90 @@ body {
 
 
 
+/* Hamburger Menu */
+.menu-toggle {
+  display: none;
+  cursor: pointer;
+}
 
+.menu-toggle div {
+  width: 30px;
+  height: 3px;
+  background-color: black;
+  margin: 6px 0;
+}
+
+/* Navigation Links */
+.nav-link {
+  display: flex;
+  width: 350px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-link a {
+  text-decoration: none;
+  color: #000000;
+}
+
+/* Hide menu on small screens */
+@media (max-width: 768px) {
+  .nav-link {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: white;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    padding: 20px 0;
+  }
+
+  .nav-link a {
+    padding: 10px;
+    text-align: center;
+    display: block;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-active {
+    display: flex;
+  }
+}
+
+/* Icon section */
+.icon-svg {
+  width: auto;
+  gap: 15px;
+  display: flex;
+  align-items: center;
+}
+
+/* Background Image */
+.bg-img {
+  position: relative;
+  width: 100%;
+  height: 290px;
+  overflow: hidden;
+}
+
+.bg-img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(2px);
+  opacity: 50%;
+}
+
+/* Cart Container */
 .cart-container {
   display: flex;
   justify-content: space-between;
@@ -144,8 +237,6 @@ body {
 .cart-items th, .cart-items td {
   padding: 10px;
   text-align: left;
-  
-  /* border-bottom: 1px solid #ddd; */
 }
 
 .cart-items th {
@@ -161,7 +252,6 @@ body {
 .product-info img {
   width: 60px;
   height: 60px;
-  /* border-radius: 10px; */
   margin-right: 10px;
 }
 
@@ -169,7 +259,6 @@ body {
   width: 40px;
   text-align: center;
   border: 1px solid #ddd;
-  /* border-radius: 5px; */
 }
 
 .delete {
@@ -179,10 +268,10 @@ body {
   margin-left: 10px;
 }
 
+/* Cart Totals */
 .cart-totals {
   background: #F9F1E7;
-  padding: 5px 20px 20px 20px;
-  /* border-radius: 10px; */
+  padding: 20px;
   width: 250px;
 }
 
@@ -204,14 +293,17 @@ body {
 }
 
 #checkout {
-  width: 100%;
+  width: 70%;
   padding: 10px;
   border: none;
-  border-radius: 5px;
   background: white;
   border: 2px solid black;
   cursor: pointer;
   font-size: 16px;
+  border-radius: 10px;
+  margin-left: 50px;
+  margin-top: 20px;
+
 }
 
 #checkout:hover {
@@ -219,18 +311,40 @@ body {
   color: white;
 }
 
-/* .footer-section {
- 
-  width: Fixed (1,440px)px;
-  height: Fixed (270px)px;
-  top: 963px;
-  padding: 100px 0px 100px 0px;
-  gap: 0px;
-  justify: space-between;
-  opacity: 0px;
-} */
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .cart-container {
+    flex-direction: column;
+    align-items: center;
+  }
 
-/* Footer container */
+  .cart-items {
+    width: 100%;
+    padding: 0;
+  }
+
+  .cart-totals {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cart-container {
+    padding: 20px;
+  }
+
+  .product-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .product-info img {
+    margin-bottom: 5px;
+  }
+}
+
+/* Footer */
 footer {
   background-color: #faf3ea;
   padding: 30px 0;
@@ -247,40 +361,33 @@ footer {
 .footer-section-div {
   display: flex;
   align-items: center;
-  /* max-width: 220px; */
-  /* margin: 10px; */
-}
-.footer-text{
-
 }
 
 .footer-section svg {
   width: 60px;
   height: 60px;
-  /* margin-bottom: 12px; */
 }
 
 .footer-section h4 {
   font-size: 20px;
   color: #333;
-  /* margin: 10px 0;  */
-  font-weight: bold; 
+  font-weight: bold;
 }
 
 .footer-section p {
   font-size: 14px;
   color: #666;
-  /* line-height: 1.5; */
 }
-/* 
-@media (max-width: 600px) {
+
+/* Footer Responsive */
+@media (max-width: 768px) {
   .footer-section {
     flex-direction: column;
     align-items: center;
   }
-  .footer-section-div {
-    max-width: none; 
-    margin: 10px 0;
-  }
-} */
 
+  .footer-section-div {
+    flex-direction: column;
+    text-align: center;
+  }
+}
